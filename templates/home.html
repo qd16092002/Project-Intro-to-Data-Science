@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        Model dự đoán giá bất động sản Hà Nội
+    </div>
+    <div class="content-section" style="position: relative;">
+      <div class="media" style="text-align: center;">
+        <img class="rounded" src="{{ image_file }}" style="max-width:600px; width:100%">
+      </div>
+        <form method="POST" action="" class="dropzone" enctype="multipart/form-data" style="text-align: center;">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                
+            <div class='items'>
+              <div class='title' style="text-align: start;">Description</div>
+                {{ form.description(class="input") }}
+            </div>
+                <div class='items'>
+            <div class='title' style="text-align: start;">Square(m2)</div>
+                {{ form.square(class="input") }}
+            </div>
+            <div class='items_2'>
+            <div class='title' style="text-align: start;">Estate type</div>
+                {{ form.estate_type(class="input") }}
+             </div>
+             <div class='title' style="text-align: start;">Address</div>
+                {{ form.address(class="input") }}
+             </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="button") }}
+            </div>
+        </form>   
+          
+    </div>
+    <div class="content-section" style="width: 98.5%;margin-left: 10px; margin-top: 20px;">
+        Giá dự đoán: {{ predicted_price }}
+    </div>
+{% endblock content %}

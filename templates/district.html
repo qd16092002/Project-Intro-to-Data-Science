@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='plotly.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+     
+</head>    
+<body>
+    <div style="margin-top: 50px;">
+        <div class="content-section" style="position: relative;">
+            <div class="media" style="text-align: center;">
+                <img class="rounded" src="{{ image_file }}" style="max-width:600px; width:100%">
+            </div>
+            <form method="POST" action="" class="dropzone" enctype="multipart/form-data" style="text-align: center;">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group" style="margin-top: -20px;">
+                <div class='items_2'>
+                    <div class='title' style="text-align: start;">Estate type</div>
+                    <ul style="background-color: #e8e7e7; border-radius: 7px;">
+                    {% for subfield in form.data_estate_type2 %}
+                    <li style="display: inline-block;">{{ subfield(checked=subfield.checked) }} {{ subfield.label }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class='items_2'>
+                    <div class='title' style="text-align: start;">District</div>
+                    <ul style="background-color: #e8e7e7;border-radius: 7px;">
+                    {% for subfield in form.districts  %}
+                    <li style="display: inline-block;">{{ subfield(checked=subfield.checked) }} {{ subfield.label }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="button") }}
+                </div>
+            </form>   
+        </div>
+        <div  class="content-section" >
+            <div style="font-size: 25px; font-weight: 600;text-align: center;">Số lượng các kiểu bất động sản</div>
+            <div style="width: 100%; justify-content: center; display: flex;">{{ plot_data1 | safe }}</div>
+        </div>
+        <div  class="content-section" \>
+            <div style="font-size: 25px; font-weight: 600;text-align: center;">Scatter plot giá và diện tích</div>
+            <div style="width: 100%; justify-content: center; display: flex;">{{ plot_data2 | safe }}</div>
+        </div>
+        <div  class="content-section" >
+            <div style="font-size: 25px; font-weight: 600;text-align: center;">Kết hợp hai dataframe</div>
+            <div style=" justify-content: center; display: flex;">{{ plot_data3 | safe }}</div>
+        </div>
+        <div  class="content-section" >
+            <div style="font-size: 25px; font-weight: 600;text-align: center;">Giá/diện tích theo thời gian</div>
+            <div style="width: 100%; justify-content: center; display: flex;">{{ plot_data4 | safe }}</div>
+        </div>
+        <div  class="content-section" >
+            <div style="font-size: 25px; font-weight: 600;text-align: center;">Phân phối giá trên diện tích</div>
+            <div style="width: 100%; justify-content: center; display: flex;">{{ plot_data5 | safe }}</div>
+        </div>
+        <div  class="content-section" >
+            <div style="font-size: 25px; font-weight: 600;text-align: center;">Giá/diện tích trung bình BĐS theo kiểu</div>
+            <div style="width: 100%; justify-content: center; display: flex;">{{ plot_data6 | safe }}</div>
+        </div>
+    </div>
+</body>        
+{% endblock content %}
